@@ -1,3 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  color: #e7eaf3;
+  background: #0b1020;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: radial-gradient(circle at 15% 0%, #242f62 0, transparent 34rem), #0b1020; }
+button, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.app-shell { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; padding: 4.5rem 0 2rem; }
+.hero { margin-bottom: 2.5rem; max-width: 720px; }
+.brand { display: inline-flex; align-items: center; gap: .6rem; color: #bac6ff; font-weight: 700; letter-spacing: .01em; }
+.hero h1 { margin: 1rem 0 .65rem; }
+.hero p { color: #aab3cc; font-size: 1.125rem; line-height: 1.6; margin: .75rem 0 0; }
+
+.workspace { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.panel { background: rgba(20, 27, 52, .86); border: 1px solid #303b68; border-radius: 18px; padding: 1.4rem; box-shadow: 0 20px 50px rgba(0, 0, 0, .2); }
+.result-panel { background: rgba(20, 30, 53, .96); }
+.panel-heading { display: flex; align-items: start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+.eyebrow { color: #91a5ff; font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
+h1, h2 { margin: .35rem 0 0; font-size: 1.25rem; }
+.word-count { color: #91a5ff; background: #202d55; border-radius: 999px; padding: .35rem .6rem; font-size: .78rem; white-space: nowrap; }
+label { display: block; color: #c8cee1; font-size: .84rem; font-weight: 700; margin: .9rem 0 .4rem; }
+select, textarea, pre { width: 100%; border: 1px solid #3a4779; border-radius: 10px; background: #0e1530; color: #edf0ff; }
+select { padding: .75rem .85rem; }
+textarea { min-height: 260px; padding: .85rem; resize: vertical; line-height: 1.5; }
+pre { min-height: 347px; margin: 0; padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; font: 500 .9rem/1.65 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.actions { display: flex; justify-content: flex-end; gap: .7rem; margin-top: 1rem; }
+button { display: inline-flex; align-items: center; gap: .45rem; border-radius: 9px; border: 1px solid transparent; padding: .7rem .95rem; font-weight: 700; }
+button.primary { background: #7c8fff; color: #0b1020; }
+button.primary:hover { background: #9aa8ff; }
+button.secondary { background: transparent; border-color: #47598d; color: #d8def0; }
+button.secondary:hover { background: #202d55; }
+footer { color: #8690ae; font-size: .84rem; padding: 2rem 0 .5rem; text-align: center; }
+
+@media (max-width: 800px) { .app-shell { width: min(100% - 1.25rem, 680px); padding-top: 2rem; } .workspace { grid-template-columns: 1fr; } textarea { min-height: 210px; } pre { min-height: 265px; } }
