@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Copy, Download, RotateCcw, Sparkles } from 'lucide-react'
+import { copyTextToClipboard } from './clipboard.js'
 
 const templates = {
   general: 'You are an expert assistant. Help with the following task:',
@@ -32,6 +33,7 @@ export default function PromptOptimizerApp() {
   const [template, setTemplate] = useState('general')
   const [optimized, setOptimized] = useState(() => optimizePrompt(prompt, 'general'))
   const [copied, setCopied] = useState(false)
+  const [copyMessage, setCopyMessage] = useState('')
 
   const stats = useMemo(() => ({
     original: prompt.trim().split(/\s+/).filter(Boolean).length,
@@ -41,12 +43,18 @@ export default function PromptOptimizerApp() {
   const handleOptimize = () => {
     setOptimized(optimizePrompt(prompt, template))
     setCopied(false)
+    setCopyMessage('')
   }
 
   const handleCopy = async () => {
-    await navigator.clipboard?.writeText(optimized)
-    setCopied(true)
-    window.setTimeout(() => setCopied(false), 1800)
+    setCopied(false)
+    setCopyMessage('')
+    if (await copyTextToClipboard(optimized)) {
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1800)
+    } else {
+      setCopyMessage('Unable to copy automatically. Select the output and copy it manually.')
+    }
   }
 
   const handleExport = () => {
@@ -103,6 +111,7 @@ export default function PromptOptimizerApp() {
             <button className="secondary" onClick={handleCopy}><Copy size={16} /> {copied ? 'Copied' : 'Copy'}</button>
             <button className="primary" onClick={handleExport}><Download size={16} /> Export .txt</button>
           </div>
+          {copyMessage && <p role="status" aria-live="polite">{copyMessage}</p>}
         </div>
       </section>
 
